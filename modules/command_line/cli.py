@@ -24,10 +24,10 @@ class CommandLine:
     def get_help_menu(self):
         help_menu = """
             [Description]: This is a simple port scanner which can be used to identify the open ports developed by Bhavani E.
-                        Usage : portscanner.py -d domain/ip  -p [ ports eg: (80,443,8080,8088) ] [ options ]   
+                        Usage : portscanner.py -d domain  -p [ ports eg: (80,443,8080,8088) or 1-1000 to specify the range] [ options ]   
                 
                         [Options]
-                            -d , --domain                        : Domain/ip to scan [ Mandatory ]
+                            -d , --domain                        : Domain to scan [ Mandatory ]
                             -p , --ports (80,443,8080,8088)      : Only specified port(s) to scan. If no ports specified all ports will scanned.
                             -p-                                  : To scan all the ports
                             -b , --banner-grabbing               : Enable banner grabbing
