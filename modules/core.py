@@ -21,8 +21,11 @@ class PortScannerCore:
 
             target_domain = arguments.domain
             is_banner_grabbing_enabled = arguments.banner_grabbing
+            
+            if arguments.ports:
+                ports = arguments.ports
 
-            result = portscanner.all_ports_scanner(domain=target_domain,is_banner_grabbing=is_banner_grabbing_enabled)
+            result = portscanner.all_ports_scanner(domain=target_domain,is_banner_grabbing=is_banner_grabbing_enabled,ports = ports)
 
             print(result)
         else:

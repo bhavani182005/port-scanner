@@ -36,14 +36,20 @@ class PortScanner:
         except (socket.error,socket.timeout):
             return None
         
-    def all_ports_scanner(self,domain,is_banner_grabbing,start = 0,stop = 1024):
+    def all_ports_scanner(self,domain,is_banner_grabbing,start = 0,stop = 1024 , ports = None):
     #function to manage the threads and scanning all ports.
         open_ports = []
-        ports = list(range(start, stop))
+        if ports is None:
+            ports = list(range(start, stop))
+        else:
+            if ',' in ports[0]:
+                ports = ports[0].split(',')
+            else:
+                ports = ports
 
         with ThreadPoolExecutor(max_workers=self.default_thread_count) as executor:
             futures = {
-                executor.submit(self.port_scanner, domain, port, is_banner_grabbing): port
+                executor.submit(self.port_scanner, domain, int(port), is_banner_grabbing): port
                 for port in ports
             }
 

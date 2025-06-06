@@ -24,7 +24,7 @@ class CommandLine:
     def get_help_menu(self):
         help_menu = """
             [Description]: This is a simple port scanner which can be used to identify the open ports developed by Bhavani E.
-                        Usage : portscanner.py -d domain/ip  -p [ range (ex: 1-1000) ] [ options ]   
+                        Usage : portscanner.py -d domain/ip  -p [ ports eg: (80,443,8080,8088) ] [ options ]   
                 
                         [Options]
                             -d , --domain                        : Domain/ip to scan [ Mandatory ]
@@ -43,7 +43,7 @@ class CommandLine:
         argument_parser=argparse.ArgumentParser(add_help=False,usage=argparse.SUPPRESS,exit_on_error=False)
         try:
             argument_parser.add_argument("-d","--domain")
-            argument_parser.add_argument("-p","--ports",nargs='+')
+            argument_parser.add_argument("-p","--ports",nargs='*')
             argument_parser.add_argument("-t","--threads",type=int)
             argument_parser.add_argument("-b","--banner-grabbing",action="store_true")
             argument_parser.add_argument("-v","--verbose",action="store_true")
