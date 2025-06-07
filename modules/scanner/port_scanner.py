@@ -8,21 +8,34 @@ except ImportError as Ie:
 
 class PortScanner:
     def __init__(self ,arguments, default_thread_count = 40):
-        self.socket_timeout = 0.4
+        self.socket_timeout = 0.5
         self.buffer_size = 1024
         self.arguments = arguments
         self.default_thread_count = default_thread_count
 
-    def banner_grabber(self,soc):
+    def banner_grabber(self,domain,port,soc):
         #funtion for banner grabbing.
+        banner_result = {}
         try:
-            banner = soc.recv(self.buffer_size).decode()
+            if port in [80, 8080, 8000]:
+                soc.sendall(f"HEAD / HTTP/1.1\r\nHost: {domain}\r\n\r\n".encode())
+
+            banner = soc.recv(self.buffer_size).decode(errors="ignore")
             if banner:
-                return banner
+                lines = banner.strip().split("\n")
+                for index, line in enumerate(lines):
+                    if index == 0:
+                        banner_result['Status'] = line.strip().rstrip('\r')
+
+                    elif ': ' in line:
+                        key, value = line.split(': ', 1)
+                        banner_result[key] = value.strip().rstrip('\r')
+                return banner_result
             else:
                 return "No banner"
-        except Exception:
-            return "Error"
+            
+        except Exception as Ue:
+            return f"Error while banner grabbing : {Ue}"
 
     def port_scanner(self,domain,port,is_banner_grabbing):
         #function to scan a port.
@@ -31,7 +44,7 @@ class PortScanner:
                 soc.settimeout(self.socket_timeout)
                 soc.connect((domain,port))
                 if is_banner_grabbing:
-                    banner = self.banner_grabber(soc)
+                    banner = self.banner_grabber(domain,port,soc)
                     return (port,banner)
                 return port
         except (socket.error,socket.timeout):
