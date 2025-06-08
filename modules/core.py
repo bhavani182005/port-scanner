@@ -78,3 +78,9 @@ class PortScannerCore:
         else:
             print(f"[ ! ] Missing required arguments:\nUsage : portscanner --domain <domain> [options] \nUse --help for more helpfull information. \n")
             exit(1)
+
+def main():
+    Commandline = CommandLine()
+    print(Commandline.get_banner())
+    portscanner = PortScannerCore()
+    portscanner.main()

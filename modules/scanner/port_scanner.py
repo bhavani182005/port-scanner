@@ -96,4 +96,3 @@ class PortScanner:
                     open_ports.append(result)
 
         return open_ports
-
