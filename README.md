@@ -31,7 +31,7 @@ Step 3: Run the tool by the following command.
     python3 -m portscanner
 
     ```
-- Option to install it as a tool using setup.py [recommended]
+- Option 2: Install it as a tool using setup.py (recommended)
 
     ```bash
 
