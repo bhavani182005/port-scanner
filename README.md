@@ -46,7 +46,7 @@ Step 3: Run the tool by the following command.
 
             [Options]
                     -d , --domain                        : Domain to scan [ Mandatory ]
-                    -p , --ports (80,443,8080,8088)      : Only specified port(s) to scan. If no ports specified all ports will scanned.
+                    -p , --ports (80,443,8080,8088)      : Only specified port(s) to scan. If no ports specified all well known ports will scanned.
                     -p-                                  : To scan all the ports
                     -b , --banner-grabbing               : Enable banner grabbing
                     -v , --verbose                       : To enable verbose mode.
